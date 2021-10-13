@@ -1,7 +1,12 @@
-#[cfg(test)]
-mod tests {
-    #[test]
-    fn it_works() {
-        assert_eq!(2 + 2, 4);
-    }
+#[macro_export]
+macro_rules! avec {
+    () => {
+        Vec::new()
+    };
+}
+
+#[test]
+fn empty_vec() {
+    let x: Vec<u32> = avec![];
+    assert!(x.is_empty());
 }
