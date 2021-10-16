@@ -9,7 +9,7 @@ macro_rules! avec {
     ($element:expr; $count:expr) => ({
         let count = $count;
         let mut vs = Vec::with_capacity(count);
-        vs.extend(::std::iter::repeat($element).take(count));
+        vs.resize(count, $element);
         vs
     });
 }
