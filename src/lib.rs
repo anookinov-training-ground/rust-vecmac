@@ -8,6 +8,13 @@ macro_rules! avec {
         $(vs.push($element);)*
         vs
     }};
+    ($element:expr; $count:expr) => ({
+        let mut vs = Vec::new();
+        for _ in 0..$count {
+            vs.push($element);
+        }
+        vs
+    });
 }
 
 #[test]
@@ -34,10 +41,34 @@ fn double() {
 }
 
 #[test]
-fn trailing() {
+fn str_trailing() {
+    let x: Vec<&'static str> = avec![
+        "test",
+        "test2",
+        "test3",
+        "test4",
+        "test5",
+    ];
+    assert!(!x.is_empty());
+    assert_eq!(x.len(), 5);
+    assert_eq!(x[0], "test");
+    assert_eq!(x[4], "test5");
+}
+
+#[test]
+fn u32_trailing() {
     let x: Vec<u32> = avec![1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27,];
     assert!(!x.is_empty());
     assert_eq!(x.len(), 27);
     assert_eq!(x[0], 1);
     assert_eq!(x[26], 27);
+}
+
+#[test]
+fn clone_2() {
+    let x: Vec<u32> = avec![42; 2];
+    assert!(!x.is_empty());
+    assert_eq!(x.len(), 2);
+    assert_eq!(x[0], 42);
+    assert_eq!(x[1], 42);
 }
