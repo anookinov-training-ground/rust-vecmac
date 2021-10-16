@@ -2,10 +2,10 @@
 macro_rules! avec {
     ($($element:expr),*) => {{
         // check that count is const
-        const _: usize = $crate::count![@COUNT; $($element),*];
+        const C: usize = $crate::count![@COUNT; $($element),*];
 
         #[allow(unused_mut)]
-        let mut vs = Vec::with_capacity($crate::count![@COUNT; $($element),*]);
+        let mut vs = Vec::with_capacity(C);
         $(vs.push($element);)*
         vs
     }};
