@@ -10,9 +10,8 @@ macro_rules! avec {
         $crate::avec![$($element),*]
     }};
     ($element:expr; $count:expr) => ({
-        let count = $count;
-        let mut vs = Vec::with_capacity(count);
-        vs.resize(count, $element);
+        let mut vs = Vec::new();
+        vs.resize($count, $element);
         vs
     });
 }
