@@ -1,10 +1,13 @@
 #[macro_export]
 macro_rules! avec {
-    ($($element:expr),* $(,)?) => {{
+    ($($element:expr),*) => {{
         #[allow(unused_mut)]
         let mut vs = Vec::new();
         $(vs.push($element);)*
         vs
+    }};
+    ($($element:expr,)*) => {{
+        $crate::avec![$($element),*]
     }};
     ($element:expr; $count:expr) => ({
         let count = $count;
