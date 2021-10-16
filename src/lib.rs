@@ -2,7 +2,7 @@
 macro_rules! avec {
     ($($element:expr),*) => {{
         #[allow(unused_mut)]
-        let mut vs = Vec::new();
+        let mut vs = Vec::with_capacity($crate::avec![@COUNT; $($element),*]);
         $(vs.push($element);)*
         vs
     }};
@@ -14,6 +14,12 @@ macro_rules! avec {
         vs.resize($count, $element);
         vs
     });
+
+    (@COUNT; $($element:expr),*) => {
+        <[()]>::len(&[$($crate::avec![@SUBST; $element]),*])
+    };
+
+    (@SUBST; $element:expr) => { () };
 }
 
 #[test]
