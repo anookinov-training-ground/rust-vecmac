@@ -83,3 +83,9 @@ fn clone_2_nonliteral() {
     assert_eq!(x[0], 42);
     assert_eq!(x[1], 42);
 }
+
+/// ```compile_fail
+/// let x: Vec<u32> = vecmac::avec![42; "foo"];
+/// ```
+#[allow(dead_code)]
+struct CompileFailTest;
