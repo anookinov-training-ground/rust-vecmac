@@ -1,9 +1,7 @@
 #[macro_export]
 macro_rules! avec {
-    () => {
-        Vec::new()
-    };
-    ($($element:expr),+ $(,)?) => {{
+    ($($element:expr),* $(,)?) => {{
+        #[allow(unused_mut)]
         let mut vs = Vec::new();
         $(vs.push($element);)*
         vs
